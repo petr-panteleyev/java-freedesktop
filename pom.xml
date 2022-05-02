@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) Petr Panteleyev. All rights reserved.
+  Licensed under the BSD license. See LICENSE file in the project root for full license information.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.panteleyev</groupId>
+    <artifactId>freedesktop</artifactId>
+    <version>0.1.0</version>
+    <packaging>jar</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Java API for freedesktop.org specifications</description>
+    <url>https://github.com/petr-panteleyev/java-freedesktop</url>
+    <licenses>
+        <license>
+            <name>The 2-Clause BSD License</name>
+            <url>https://opensource.org/licenses/BSD-2-Clause</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Petr Panteleyev</name>
+            <email>petr-panteleyev@yandex.ru</email>
+            <organization>panteleyev.org</organization>
+            <organizationUrl>https://github.com/petr-panteleyev</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/petr-panteleyev/java-freedesktop.git</connection>
+        <developerConnection>scm:git:ssh://github.com:petr-panteleyev/java-freedesktop.git</developerConnection>
+        <url>https://github.com/petr-panteleyev/java-freedesktop/tree/master</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>18</maven.compiler.release>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+        <!-- Plugins -->
+        <mavenCompilerPluginVersion>3.8.1</mavenCompilerPluginVersion>
+        <mavenJarPluginVersion>3.2.0</mavenJarPluginVersion>
+        <mavenSurefirePluginVersion>3.0.0-M6</mavenSurefirePluginVersion>
+        <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
+        <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
+        <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
+        <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
+        <!-- Dependencies -->
+        <testNgVersion>7.5</testNgVersion>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testNgVersion}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${mavenCompilerPluginVersion}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${mavenJarPluginVersion}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${mavenJavadocPluginVersion}</version>
+                <configuration>
+                    <notimestamp>true</notimestamp>
+                    <author>false</author>
+                    <bottom><![CDATA[Copyright &copy; 2022, Petr Panteleyev]]></bottom>
+                    <additionalOptions>-html5 --release ${maven.compiler.release}</additionalOptions>
+                    <show>protected</show>
+                    <doclint>none</doclint>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${mavenSurefirePluginVersion}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${mavenSourcePluginVersion}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${mavenGpgPluginVersion}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${nexusStagingMavenPlugin}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
