@@ -4,16 +4,15 @@
  */
 package org.panteleyev.freedesktop.entry;
 
+import static org.panteleyev.freedesktop.entry.DesktopEntryBuilder.localeString;
 import org.panteleyev.freedesktop.menu.Category;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
-import static org.panteleyev.freedesktop.entry.LocaleString.localeString;
-import static org.testng.Assert.assertEquals;
 
 @Test
 public class TestDesktopEntryGeneration {
@@ -24,7 +23,7 @@ public class TestDesktopEntryGeneration {
                 {
                         // Minimal case
                         new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
-                                .name(localeString("Test Application")),
+                                .name("Test Application"),
                         """
                         [Desktop Entry]
                         Type=Application
@@ -33,9 +32,9 @@ public class TestDesktopEntryGeneration {
                 },
                 {
                         new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
-                                .name(localeString("Test Application"))
+                                .name("Test Application")
                                 .name(localeString("Тестовое приложение", "ru_RU"))
-                                .comment(localeString("Super test application"))
+                                .comment("Super test application")
                                 .noDisplay(false)
                                 .categories(List.of(Category.DEVELOPMENT, Category.IDE)),
                         """
@@ -52,21 +51,23 @@ public class TestDesktopEntryGeneration {
                         // Example from spec
                         new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
                                 .version(DesktopEntryBuilder.VERSION_1_0)
-                                .name(localeString("Foo Viewer"))
-                                .comment(localeString("The best viewer for Foo objects available!"))
+                                .name("Foo Viewer")
+                                .comment("The best viewer for Foo objects available!")
+                                .customEntry("X-KDE-StartupNotify", "true")
                                 .tryExec("fooview")
                                 .exec("fooview %F")
-                                .icon(localeString("fooview"))
+                                .customEntry("X-KDE-StartupNotify", localeString("false", "en_US"))
+                                .icon("fooview")
                                 .mimeType(List.of("image/x-foo"))
                                 .actions(List.of(
                                         new ApplicationActionBuilder("Gallery")
                                                 .exec("fooview --gallery")
-                                                .name(localeString("Browse Gallery"))
+                                                .name("Browse Gallery")
                                                 .build(),
                                         new ApplicationActionBuilder("Create")
                                                 .exec("fooview --create-new")
-                                                .name(localeString("Create a new Foo!"))
-                                                .icon(localeString("fooview-new"))
+                                                .name("Create a new Foo!")
+                                                .icon("fooview-new")
                                                 .build()
                                 )
                         ),
@@ -81,6 +82,8 @@ public class TestDesktopEntryGeneration {
                         Exec=fooview %F
                         Actions=Gallery;Create;
                         MimeType=image/x-foo;
+                        X-KDE-StartupNotify=true
+                        X-KDE-StartupNotify[en_US]=false
                         
                         [Desktop Action Gallery]
                         Name=Browse Gallery

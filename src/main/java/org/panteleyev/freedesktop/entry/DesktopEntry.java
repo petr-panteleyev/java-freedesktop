@@ -4,6 +4,8 @@
  */
 package org.panteleyev.freedesktop.entry;
 
+import static org.panteleyev.freedesktop.directory.XDGBaseDirectory.getUserDesktopEntryDirectory;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,9 +14,6 @@ import java.io.PrintWriter;
 import java.io.UncheckedIOException;
 import java.util.Collection;
 import java.util.Comparator;
-
-import static java.util.Comparator.comparing;
-import static org.panteleyev.freedesktop.directory.XDGBaseDirectory.getUserDesktopEntryDirectory;
 
 /**
  * Implements Desktop Entry specification.
@@ -33,7 +32,17 @@ public class DesktopEntry {
     private static final String DESKTOP_ENTRY = "[Desktop Entry]";
     private static final String DESKTOP_ACTION_TEMPLATE = "[Desktop Action %s]";
 
-    private static final Comparator<Entry> ENTRY_COMPARATOR = comparing(Entry::key).thenComparing(Entry::locale);
+    private static final Comparator<Entry> ENTRY_COMPARATOR = ((Comparator<Entry>) (o1, o2) -> {
+        if (o1.key() instanceof Key k1 && o2.key() instanceof Key k2) {
+            return k1.compareTo(k2);
+        } else if (o1.key() instanceof String s1 && o2.key() instanceof String s2) {
+            return s1.compareTo(s2);
+        } else if (o1.key() instanceof Key && o2.key() instanceof String) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }).thenComparing(Entry::locale);
 
     private final DesktopEntryType type;
     private final Collection<Entry> entries;
@@ -109,7 +118,7 @@ public class DesktopEntry {
             pr.print("[" + entry.locale() + "]");
         }
         pr.print("=");
-        pr.println(entry.value());
+        pr.println(entry.value().toString());
     }
 }
 

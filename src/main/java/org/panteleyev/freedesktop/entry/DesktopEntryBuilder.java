@@ -35,7 +35,7 @@ public class DesktopEntryBuilder {
      */
     public DesktopEntryBuilder(DesktopEntryType type) {
         this.type = Objects.requireNonNull(type, "Desktop Entry type cannot by null");
-        entries.add(new Entry(Key.TYPE, type.toString(), ""));
+        entries.add(new Entry(Key.TYPE, type.toString()));
     }
 
     /**
@@ -45,9 +45,7 @@ public class DesktopEntryBuilder {
      * @param version version
      */
     public DesktopEntryBuilder version(String version) {
-        entries.add(new Entry(Key.VERSION,
-                Objects.requireNonNull(version),
-                ""));
+        entries.add(new Entry(Key.VERSION, Objects.requireNonNull(version)));
         return this;
     }
 
@@ -56,9 +54,9 @@ public class DesktopEntryBuilder {
      *
      * @param name name
      */
-    public DesktopEntryBuilder name(LocaleString name) {
+    public DesktopEntryBuilder name(CharSequence name) {
         Objects.requireNonNull(name);
-        entries.add(new Entry(Key.NAME, name.value(), name.locale()));
+        entries.add(new Entry(Key.NAME, name));
         return this;
     }
 
@@ -67,8 +65,8 @@ public class DesktopEntryBuilder {
      *
      * @param name name
      */
-    public DesktopEntryBuilder genericName(LocaleString name) {
-        entries.add(new Entry(Key.GENERIC_NAME, name.value(), name.locale()));
+    public DesktopEntryBuilder genericName(CharSequence name) {
+        entries.add(new Entry(Key.GENERIC_NAME, name));
         return this;
     }
 
@@ -81,7 +79,7 @@ public class DesktopEntryBuilder {
      * @param noDisplay noDisplay value
      */
     public DesktopEntryBuilder noDisplay(boolean noDisplay) {
-        entries.add(new Entry(Key.NO_DISPLAY, Boolean.toString(noDisplay), ""));
+        entries.add(new Entry(Key.NO_DISPLAY, Boolean.toString(noDisplay)));
         return this;
     }
 
@@ -91,8 +89,8 @@ public class DesktopEntryBuilder {
      *
      * @param comment comment
      */
-    public DesktopEntryBuilder comment(LocaleString comment) {
-        entries.add(new Entry(Key.COMMENT, comment.value(), comment.locale()));
+    public DesktopEntryBuilder comment(CharSequence comment) {
+        entries.add(new Entry(Key.COMMENT, comment));
         return this;
     }
 
@@ -105,8 +103,8 @@ public class DesktopEntryBuilder {
      * @param icon Icon value
      * @return this
      */
-    public DesktopEntryBuilder icon(LocaleString icon) {
-        entries.add(new Entry(Key.ICON, icon.value(), icon.locale()));
+    public DesktopEntryBuilder icon(CharSequence icon) {
+        entries.add(new Entry(Key.ICON, icon));
         return this;
     }
 
@@ -120,7 +118,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder hidden(boolean hidden) {
-        entries.add(new Entry(Key.HIDDEN, Boolean.toString(hidden), ""));
+        entries.add(new Entry(Key.HIDDEN, Boolean.toString(hidden)));
         return this;
     }
 
@@ -136,7 +134,7 @@ public class DesktopEntryBuilder {
                 .map(OnlyShowInEnvironment::getValue)
                 .collect(Collectors.joining(";"))
                 + ";";
-        entries.add(new Entry(Key.ONLY_SHOW_IN, value, ""));
+        entries.add(new Entry(Key.ONLY_SHOW_IN, value));
         return this;
     }
 
@@ -152,7 +150,7 @@ public class DesktopEntryBuilder {
                 .map(OnlyShowInEnvironment::getValue)
                 .collect(Collectors.joining(";"))
                 + ";";
-        entries.add(new Entry(Key.NOT_SHOW_IN, value, ""));
+        entries.add(new Entry(Key.NOT_SHOW_IN, value));
         return this;
     }
 
@@ -168,7 +166,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder dBusActivatable(boolean dBusActivatable) {
-        entries.add(new Entry(Key.D_BUS_ACTIVATABLE, Boolean.toString(dBusActivatable), ""));
+        entries.add(new Entry(Key.D_BUS_ACTIVATABLE, Boolean.toString(dBusActivatable)));
         return this;
     }
 
@@ -181,7 +179,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder tryExec(String tryExec) {
-        entries.add(new Entry(Key.TRY_EXEC, tryExec, ""));
+        entries.add(new Entry(Key.TRY_EXEC, tryExec));
         return this;
     }
 
@@ -196,7 +194,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder exec(String exec) {
-        entries.add(new Entry(Key.EXEC, exec, ""));
+        entries.add(new Entry(Key.EXEC, exec));
         return this;
     }
 
@@ -207,7 +205,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder path(String path) {
-        entries.add(new Entry(Key.PATH, path, ""));
+        entries.add(new Entry(Key.PATH, path));
         return this;
     }
 
@@ -218,7 +216,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder terminal(boolean terminal) {
-        entries.add(new Entry(Key.TERMINAL, Boolean.toString(terminal), ""));
+        entries.add(new Entry(Key.TERMINAL, Boolean.toString(terminal)));
         return this;
     }
 
@@ -237,7 +235,7 @@ public class DesktopEntryBuilder {
                 .map(ApplicationAction::name)
                 .collect(Collectors.joining(";"))
                 + ";";
-        entries.add(new Entry(Key.ACTIONS, value, ""));
+        entries.add(new Entry(Key.ACTIONS, value));
         return this;
     }
 
@@ -249,7 +247,7 @@ public class DesktopEntryBuilder {
      */
     public DesktopEntryBuilder mimeType(List<String> mimeType) {
         var value = String.join(";", mimeType) + ";";
-        entries.add(new Entry(Key.MIME_TYPE, value, ""));
+        entries.add(new Entry(Key.MIME_TYPE, value));
         return this;
     }
 
@@ -265,7 +263,7 @@ public class DesktopEntryBuilder {
                 .map(Category::toString)
                 .collect(Collectors.joining(";"))
                 + ";";
-        entries.add(new Entry(Key.CATEGORIES, value, ""));
+        entries.add(new Entry(Key.CATEGORIES, value));
         return this;
     }
 
@@ -280,7 +278,7 @@ public class DesktopEntryBuilder {
      */
     public DesktopEntryBuilder keywords(List<String> keywords, String locale) {
         var value = String.join(";", keywords) + ";";
-        entries.add(new Entry(Key.KEYWORDS, value, locale));
+        entries.add(new Entry(Key.KEYWORDS, localeString(value, locale)));
         return this;
     }
 
@@ -308,7 +306,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder startupNotify(boolean startupNotify) {
-        entries.add(new Entry(Key.STARTUP_NOTIFY, Boolean.toString(startupNotify), ""));
+        entries.add(new Entry(Key.STARTUP_NOTIFY, Boolean.toString(startupNotify)));
         return this;
     }
 
@@ -322,7 +320,7 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder startupWmClass(String startupWmClass) {
-        entries.add(new Entry(Key.STARTUP_WM_CLASS, startupWmClass, ""));
+        entries.add(new Entry(Key.STARTUP_WM_CLASS, startupWmClass));
         return this;
     }
 
@@ -333,7 +331,19 @@ public class DesktopEntryBuilder {
      * @return this
      */
     public DesktopEntryBuilder url(String url) {
-        entries.add(new Entry(Key.URL, url, ""));
+        entries.add(new Entry(Key.URL, url));
+        return this;
+    }
+
+    /**
+     * Custom entry not defined in the specification.
+     *
+     * @param key   key
+     * @param value value
+     * @return this
+     */
+    public DesktopEntryBuilder customEntry(String key, CharSequence value) {
+        entries.add(new Entry(key, value));
         return this;
     }
 
@@ -351,5 +361,38 @@ public class DesktopEntryBuilder {
         if (entries.isEmpty()) {
             throw new ValidationException("Mandatory entries are missing");
         }
+
+        // Select only keys from enum Key, custom keys are not validated
+        var keys = entries.stream()
+                .map(Entry::key)
+                .filter(key -> key instanceof Key)
+                .map(key -> (Key) key)
+                .toList();
+
+        // Check if all keys are allowed
+        for (var key : keys) {
+            if (!key.getAllowed().contains(type)) {
+                throw new ValidationException("Key " + key + " is not allowed for " + type);
+            }
+        }
+
+        // Check for mandatory entries
+        if (type == DesktopEntryType.LINK && !keys.contains(Key.URL)) {
+            throw new ValidationException("Mandatory key URL is missing");
+        }
+        if (!keys.contains(Key.NAME)) {
+            throw new ValidationException("Mandatory key Name is missing");
+        }
+    }
+
+    /**
+     * Creates string with locale.
+     *
+     * @param value  string value
+     * @param locale string locale
+     * @return string with locale
+     */
+    public static CharSequence localeString(String value, String locale) {
+        return new LocaleString(value, locale);
     }
 }

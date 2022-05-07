@@ -9,7 +9,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>freedesktop</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -46,7 +46,7 @@
         <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
         <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
         <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
-        <nexusStagingMavenPlugin>1.6.8</nexusStagingMavenPlugin>
+        <nexusStagingMavenPlugin>1.6.13</nexusStagingMavenPlugin>
         <!-- Dependencies -->
         <testNgVersion>7.5</testNgVersion>
     </properties>

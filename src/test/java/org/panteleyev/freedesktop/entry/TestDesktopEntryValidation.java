@@ -10,8 +10,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.panteleyev.freedesktop.entry.LocaleString.localeString;
-
 @Test
 public class TestDesktopEntryValidation {
 
@@ -20,21 +18,22 @@ public class TestDesktopEntryValidation {
         return new Object[][]{
                 {
                         new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
-                                .name(localeString("Test Application"))
-                },
-                {
-                        new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
-                                .url("value")
-                },
-                {
-                        new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
                                 .categories(List.of(Category.IDE))
-                }
+                },
+                {
+                        new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
+                                .name("Name")
+                                .url("url")
+                },
+                {
+                        new DesktopEntryBuilder(DesktopEntryType.LINK)
+                                .name("Name")
+                },
         };
     }
 
 
-    @Test(dataProvider = "dataProvider", expectedExceptions = ValidationException.class, enabled = false)
+    @Test(dataProvider = "dataProvider", expectedExceptions = ValidationException.class)
     public void testNegativeValidation(DesktopEntryBuilder builder) {
         builder.build();
     }

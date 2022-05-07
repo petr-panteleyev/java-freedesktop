@@ -33,8 +33,8 @@ public class ApplicationActionBuilder {
      * @param name Name value
      * @return this
      */
-    public ApplicationActionBuilder name(LocaleString name) {
-        entries.add(new Entry(Key.NAME, name.value(), name.locale()));
+    public ApplicationActionBuilder name(CharSequence name) {
+        entries.add(new Entry(Key.NAME, name));
         return this;
     }
 
@@ -47,8 +47,8 @@ public class ApplicationActionBuilder {
      * @param icon Icon value
      * @return this
      */
-    public ApplicationActionBuilder icon(LocaleString icon) {
-        entries.add(new Entry(Key.ICON, icon.value(), icon.locale()));
+    public ApplicationActionBuilder icon(CharSequence icon) {
+        entries.add(new Entry(Key.ICON, icon));
         return this;
     }
 
@@ -63,9 +63,7 @@ public class ApplicationActionBuilder {
      * @return this
      */
     public ApplicationActionBuilder exec(String exec) {
-        entries.add(new Entry(Key.EXEC,
-                Objects.requireNonNull(exec).trim(),
-                ""));
+        entries.add(new Entry(Key.EXEC, Objects.requireNonNull(exec).trim()));
         return this;
     }
 

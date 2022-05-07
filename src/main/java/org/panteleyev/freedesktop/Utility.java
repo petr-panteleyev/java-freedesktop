@@ -4,8 +4,6 @@
  */
 package org.panteleyev.freedesktop;
 
-import org.panteleyev.freedesktop.entry.LocaleString;
-
 import java.util.Optional;
 
 /**
@@ -28,7 +26,7 @@ public abstract class Utility {
      * Returns current executable command. Useful to build
      * {@link org.panteleyev.freedesktop.entry.DesktopEntryBuilder#exec(String)},
      * {@link org.panteleyev.freedesktop.entry.DesktopEntryBuilder#tryExec(String)} and
-     * {@link org.panteleyev.freedesktop.entry.DesktopEntryBuilder#icon(LocaleString)}
+     * {@link org.panteleyev.freedesktop.entry.DesktopEntryBuilder#icon(CharSequence)}
      * values.
      *
      * @return executable command

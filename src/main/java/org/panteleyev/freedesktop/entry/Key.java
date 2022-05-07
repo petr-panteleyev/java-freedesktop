@@ -4,13 +4,12 @@
  */
 package org.panteleyev.freedesktop.entry;
 
-import java.util.List;
 import java.util.Set;
 
 /**
  * Defines file entry keys.
  */
-enum Key {
+enum Key implements CharSequence {
     TYPE("Type"),
     VERSION("Version"),
     NAME("Name"),
@@ -34,10 +33,6 @@ enum Key {
     STARTUP_WM_CLASS("StartupWMClass", DesktopEntryType.APPLICATION),
     URL("URL", DesktopEntryType.LINK);
 
-    public static final List<Key> MANDATORY_KEYS = List.of(
-            TYPE, NAME, URL
-    );
-
     private final String value;
     private final Set<DesktopEntryType> allowed;
 
@@ -49,6 +44,25 @@ enum Key {
     Key(String value) {
         this.value = value;
         this.allowed = DesktopEntryType.ALL;
+    }
+
+    Set<DesktopEntryType> getAllowed() {
+        return allowed;
+    }
+
+    @Override
+    public int length() {
+        return toString().length();
+    }
+
+    @Override
+    public char charAt(int index) {
+        return toString().charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return toString().subSequence(start, end);
     }
 
     @Override

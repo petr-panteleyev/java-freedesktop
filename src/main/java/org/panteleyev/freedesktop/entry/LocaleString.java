@@ -6,36 +6,29 @@ package org.panteleyev.freedesktop.entry;
 
 import java.util.Objects;
 
-/**
- * Implements string value with locale.
- *
- * @param value  string value
- * @param locale string locale, empty if default
- */
-public record LocaleString(String value, String locale) {
-    public LocaleString {
+record LocaleString(String value, String locale) implements CharSequence {
+    LocaleString {
         value = Objects.requireNonNull(value).trim();
         locale = Objects.requireNonNull(locale).trim();
     }
 
-    /**
-     * Creates {@link LocaleString} instance with specified locale.
-     *
-     * @param value  string value
-     * @param locale string locale
-     * @return {@link LocaleString} instance
-     */
-    public static LocaleString localeString(String value, String locale) {
-        return new LocaleString(value, locale);
+    @Override
+    public int length() {
+        return value.length();
     }
 
-    /**
-     * Creates {@link LocaleString} instance with default (empty) locale.
-     *
-     * @param value string value
-     * @return {@link LocaleString} instance
-     */
-    public static LocaleString localeString(String value) {
-        return new LocaleString(value, "");
+    @Override
+    public char charAt(int index) {
+        return value.charAt(index);
+    }
+
+    @Override
+    public CharSequence subSequence(int start, int end) {
+        return value.subSequence(start, end);
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

@@ -14,7 +14,7 @@ public enum DesktopEntryType {
     LINK("Link", "desktop"),
     DIRECTORY("Directory", "directory");
 
-    public static final Set<DesktopEntryType> ALL = Set.of(DesktopEntryType.values());
+    static final Set<DesktopEntryType> ALL = Set.of(DesktopEntryType.values());
 
     private final String value;
     private final String fileExtension;
@@ -29,6 +29,12 @@ public enum DesktopEntryType {
         return value;
     }
 
+    /**
+     * Returns file extension for desktop entry type. Desktop entry files should have the <code>.desktop</code>
+     * extension, except for files of type Directory which should have the <code>.directory</code> extension.
+     *
+     * @return file extension
+     */
     public String getFileExtension() {
         return fileExtension;
     }

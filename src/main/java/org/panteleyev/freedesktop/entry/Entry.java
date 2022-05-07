@@ -4,5 +4,8 @@
  */
 package org.panteleyev.freedesktop.entry;
 
-record Entry(Key key, String value, String locale) {
+record Entry(CharSequence key, CharSequence value) {
+    String locale() {
+        return value instanceof LocaleString localeString ? localeString.locale() : "";
+    }
 }

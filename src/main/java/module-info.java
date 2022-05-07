@@ -1,3 +1,6 @@
+/**
+ * Implements various freedesktop.org specifications.
+ */
 module org.panteleyev.freedesktop {
     exports org.panteleyev.freedesktop;
     exports org.panteleyev.freedesktop.directory;
