@@ -1,19 +1,30 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright (c) 2022, Petr Panteleyev
+
+ This program is free software: you can redistribute it and/or modify it under the
+ terms of the GNU General Public License as published by the Free Software
+ Foundation, either version 3 of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License along with this
+ program. If not, see <https://www.gnu.org/licenses/>.
  */
 package org.panteleyev.freedesktop.entry;
 
-import static org.panteleyev.freedesktop.directory.XDGBaseDirectory.getUserDesktopEntryDirectory;
-
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.UncheckedIOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Comparator;
+
+import static org.panteleyev.freedesktop.directory.XDGBaseDirectory.getUserDesktopEntryDirectory;
 
 /**
  * Implements Desktop Entry specification.
@@ -61,27 +72,24 @@ public class DesktopEntry {
      * @param name file name without extension
      */
     public void write(String name) {
-        var dir = getUserDesktopEntryDirectory();
-        if (!dir.exists()) {
-            if (!dir.mkdir()) {
-                throw new RuntimeException("Unable to create directory " + dir.getAbsolutePath());
-            }
+        try {
+            var dir = getUserDesktopEntryDirectory();
+            Files.createDirectories(dir);
+            write(Path.of(dir.toString(), name + "." + type.getFileExtension()));
+        } catch (FileAlreadyExistsException ex) {
+            throw new RuntimeException("Unable to create directory " + ex.getFile());
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
         }
-
-        if (!dir.isDirectory()) {
-            throw new IllegalStateException(dir.getAbsolutePath() + " is not a directory");
-        }
-
-        write(new File(dir, name + "." + type.getFileExtension()));
     }
 
     /**
      * Writes Desktop Entry into the file.
      *
-     * @param file desktop entry file
+     * @param path path to desktop entry file
      */
-    public void write(File file) {
-        try (var out = new FileOutputStream(file)) {
+    public void write(Path path) {
+        try (var out = Files.newOutputStream(path)) {
             write(out);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);

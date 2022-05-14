@@ -1,13 +1,28 @@
 /*
- Copyright (c) Petr Panteleyev. All rights reserved.
- Licensed under the BSD license. See LICENSE file in the project root for full license information.
+ Copyright (c) 2022, Petr Panteleyev
+
+ This program is free software: you can redistribute it and/or modify it under the
+ terms of the GNU General Public License as published by the Free Software
+ Foundation, either version 3 of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful, but WITHOUT ANY
+ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License along with this
+ program. If not, see <https://www.gnu.org/licenses/>.
  */
 package org.panteleyev.freedesktop.directory;
 
 import org.panteleyev.freedesktop.EnvironmentVariable;
 
-import java.io.File;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.lang.System.getProperty;
 
 /**
  * Implements
@@ -31,20 +46,10 @@ public abstract class XDGBaseDirectory {
      *
      * @return data files directory path
      */
-    public static String getDataHome() {
-        return getDirectoryLocation(EnvironmentVariable.XDG_DATA_HOME).orElseGet(() -> {
-            var home = System.getProperty("user.home");
-            return home + "/.local/share";
-        });
-    }
-
-    /**
-     * Returns {@link File} object corresponding to {@link #getDataHome()}.
-     *
-     * @return data files directory
-     */
-    public static File getDataHomeDirectory() {
-        return new File(getDataHome());
+    public static Path getDataHome() {
+        return getDirectoryLocation(EnvironmentVariable.XDG_DATA_HOME)
+                .map(Path::of)
+                .orElseGet(() -> Path.of(getProperty("user.home"), ".local", "share"));
     }
 
     /**
@@ -54,20 +59,10 @@ public abstract class XDGBaseDirectory {
      *
      * @return configuration files directory path
      */
-    public static String getConfigHome() {
-        return getDirectoryLocation(EnvironmentVariable.XDG_CONFIG_HOME).orElseGet(() -> {
-            var home = System.getProperty("user.home");
-            return home + "/.config";
-        });
-    }
-
-    /**
-     * Returns {@link File} object corresponding to {@link #getConfigHome()}.
-     *
-     * @return configuration files directory
-     */
-    public static File getConfigDirectory() {
-        return new File(getConfigHome());
+    public static Path getConfigHome() {
+        return getDirectoryLocation(EnvironmentVariable.XDG_CONFIG_HOME)
+                .map(Path::of)
+                .orElseGet(() -> Path.of(getProperty("user.home"), ".config"));
     }
 
     /**
@@ -80,8 +75,11 @@ public abstract class XDGBaseDirectory {
      *
      * @return additional data files locations
      */
-    public static String getDataDirs() {
-        return getDirectoryLocation(EnvironmentVariable.XDG_DATA_DIRS).orElse("/usr/local/share/:/usr/share/");
+    public static Set<Path> getDataDirs() {
+        var env = getDirectoryLocation(EnvironmentVariable.XDG_DATA_DIRS).orElse("/usr/local/share/:/usr/share/");
+        return Arrays.stream(env.split(":"))
+                .map(Path::of)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -94,8 +92,11 @@ public abstract class XDGBaseDirectory {
      *
      * @return additional configuration files locations
      */
-    public static String getConfigDirs() {
-        return getDirectoryLocation(EnvironmentVariable.XDG_CONFIG_DIRS).orElse(" /etc/xdg");
+    public static Set<Path> getConfigDirs() {
+        var env = getDirectoryLocation(EnvironmentVariable.XDG_CONFIG_DIRS).orElse("/etc/xdg");
+        return Arrays.stream(env.split(":"))
+                .map(Path::of)
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -105,20 +106,10 @@ public abstract class XDGBaseDirectory {
      *
      * @return cache files directory path
      */
-    public static String getCacheHome() {
-        return getDirectoryLocation(EnvironmentVariable.XDG_CACHE_HOME).orElseGet(() -> {
-            var home = System.getProperty("user.home");
-            return home + "/.cache";
-        });
-    }
-
-    /**
-     * Returns {@link File} object corresponding to {@link #getCacheHome()}.
-     *
-     * @return cache files directory
-     */
-    public static File getCacheDirectory() {
-        return new File(getCacheHome());
+    public static Path getCacheHome() {
+        return getDirectoryLocation(EnvironmentVariable.XDG_CACHE_HOME)
+                .map(Path::of)
+                .orElseGet(() -> Path.of(getProperty("user.home"), ".cache"));
     }
 
     /**
@@ -126,8 +117,8 @@ public abstract class XDGBaseDirectory {
      *
      * @return system desktop entries directory
      */
-    public static File getSystemDesktopEntryDirectory() {
-        return new File("/usr/share/applications");
+    public static Path getSystemDesktopEntryDirectory() {
+        return Path.of("/usr/share/applications");
     }
 
     /**
@@ -135,7 +126,7 @@ public abstract class XDGBaseDirectory {
      *
      * @return user desktop entries directory
      */
-    public static File getUserDesktopEntryDirectory() {
-        return new File(getDataHomeDirectory(), "applications");
+    public static Path getUserDesktopEntryDirectory() {
+        return Path.of(getDataHome().toString(), "applications");
     }
 }

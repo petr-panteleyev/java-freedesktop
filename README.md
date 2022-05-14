@@ -1,6 +1,6 @@
 # FreeDesktop for Java
 
-[![BSD-2 license](https://img.shields.io/badge/License-BSD--2-informational.svg)](LICENSE)
+[![GitHub](https://img.shields.io/github/license/petr-panteleyev/java-freedesktop)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-18-orange?logo=java)](https://jdk.java.net/18/)
 [![Maven Central](http://img.shields.io/maven-central/v/org.panteleyev/freedesktop)](https://search.maven.org/search?q=g:org.panteleyev%20AND%20a:freedesktop)
 [![Javadocs](http://www.javadoc.io/badge/org.panteleyev/freedesktop.svg)](http://www.javadoc.io/doc/org.panteleyev/freedesktop)
