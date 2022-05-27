@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -38,10 +38,13 @@ enum Key implements CharSequence {
     ACTIONS("Actions", DesktopEntryType.APPLICATION),
     MIME_TYPE("MimeType", DesktopEntryType.APPLICATION),
     CATEGORIES("Categories", DesktopEntryType.APPLICATION),
+    IMPLEMENTS("Implements"),
     KEYWORDS("Keywords", DesktopEntryType.APPLICATION),
     STARTUP_NOTIFY("StartupNotify", DesktopEntryType.APPLICATION),
     STARTUP_WM_CLASS("StartupWMClass", DesktopEntryType.APPLICATION),
-    URL("URL", DesktopEntryType.LINK);
+    URL("URL", DesktopEntryType.LINK),
+    PREFERS_NON_DEFAULT_GPU("PrefersNonDefaultGPU", DesktopEntryType.APPLICATION),
+    SINGLE_MAIN_WINDOW("SingleMainWindow", DesktopEntryType.APPLICATION);
 
     private final String value;
     private final Set<DesktopEntryType> allowed;

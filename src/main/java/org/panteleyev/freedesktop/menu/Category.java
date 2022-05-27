@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -59,6 +59,10 @@ public enum Category {
      * An office type application
      */
     OFFICE("Office"),
+    /**
+     * Scientific software.
+     */
+    SCIENCE("Science"),
     /**
      * Settings applications. Entries may appear in a separate menu or as part of a &quot;Control Center&quot;.
      */
@@ -363,10 +367,6 @@ public enum Category {
      * Software to learn foreign languages
      */
     LANGUAGES("Languages", EDUCATION),
-    /**
-     * Scientific software.
-     */
-    SCIENCE("Science", EDUCATION),
     /**
      * Artificial Intelligence software.
      */

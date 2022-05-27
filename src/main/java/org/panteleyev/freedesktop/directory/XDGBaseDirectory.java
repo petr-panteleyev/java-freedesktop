@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -26,7 +26,7 @@ import static java.lang.System.getProperty;
 
 /**
  * Implements
- * <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-0.6.html/">XDG Base Directory Specification</a>.
+ * <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-0.8.html/">XDG Base Directory Specification</a>.
  */
 public abstract class XDGBaseDirectory {
     private XDGBaseDirectory() {
@@ -63,6 +63,18 @@ public abstract class XDGBaseDirectory {
         return getDirectoryLocation(EnvironmentVariable.XDG_CONFIG_HOME)
                 .map(Path::of)
                 .orElseGet(() -> Path.of(getProperty("user.home"), ".config"));
+    }
+
+    /**
+     * Returns directory that contains state data that should persist between (application) restarts, but that is not
+     * important or portable enough to the user that it should be stored in <code>$XDG_DATA_HOME</code>.
+     *
+     * @return state data directory path
+     */
+    public static Path getStateHome() {
+        return getDirectoryLocation(EnvironmentVariable.XDG_STATE_HOME)
+                .map(Path::of)
+                .orElseGet(() -> Path.of(getProperty("user.home"), ".local", "state"));
     }
 
     /**
@@ -110,6 +122,17 @@ public abstract class XDGBaseDirectory {
         return getDirectoryLocation(EnvironmentVariable.XDG_CACHE_HOME)
                 .map(Path::of)
                 .orElseGet(() -> Path.of(getProperty("user.home"), ".cache"));
+    }
+
+    /**
+     * Returns the base directory relative to which user-specific non-essential runtime files and other file objects
+     * (such as sockets, named pipes, ...) should be stored.
+     *
+     * @return runtime directory path
+     */
+    public static Optional<Path> getRuntimeDir() {
+        return getDirectoryLocation(EnvironmentVariable.XDG_RUNTIME_DIR)
+                .map(Path::of);
     }
 
     /**

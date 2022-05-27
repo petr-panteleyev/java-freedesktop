@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -27,10 +27,13 @@ import java.util.stream.Collectors;
 /**
  * Implements Desktop Entry builder.
  * Methods correspond to Desktop Entry attributes defined in
- * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html">freedesktop.org specification</a>.
+ * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.5.html">freedesktop.org specification</a>.
  */
 public class DesktopEntryBuilder {
-    public static final String VERSION_1_0 = "1.0";
+    /**
+     * Specification version.
+     */
+    public static final String VERSION_1_5 = "1.5";
 
     private final DesktopEntryType type;
 
@@ -50,7 +53,7 @@ public class DesktopEntryBuilder {
 
     /**
      * Version of the Desktop Entry Specification that the desktop entry conforms with. Entries that confirm with
-     * this version of the specification should use 1.0. Note that the version field is not required to be present.
+     * this version of the specification should use 1.5. Note that the version field is not required to be present.
      *
      * @param version version
      */
@@ -168,7 +171,7 @@ public class DesktopEntryBuilder {
      * A boolean value specifying if D-Bus activation is supported for this application. If this key is missing, the
      * default value is false. If the value is true then implementations should ignore the Exec key and send a D-Bus
      * message to launch the application. See
-     * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html#dbus">D-Bus Activation</a>
+     * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.5.html#dbus">D-Bus Activation</a>
      * for more information on how this works. Applications should still include Exec= lines in their desktop files
      * for compatibility with implementations that do not understand the DBusActivatable key.
      *
@@ -195,7 +198,7 @@ public class DesktopEntryBuilder {
 
     /**
      * Program to execute, possibly with arguments. See the
-     * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html#exec-variables">Exec key</a>
+     * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.5.html#exec-variables">Exec key</a>
      * for details on how this key works. The Exec key is required if DBusActivatable is not set to true. Even if
      * DBusActivatable is true, Exec should be specified for compatibility with implementations that do not
      * understand DBusActivatable.
@@ -233,7 +236,7 @@ public class DesktopEntryBuilder {
     /**
      * Identifiers for application actions. This can be used to tell the application to make a specific action,
      * different from the default behavior. The
-     * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html#extra-actions">Application actions</a>
+     * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.5.html#extra-actions">Application actions</a>
      * section describes how actions work.
      *
      * @param actions Application actions
@@ -274,6 +277,21 @@ public class DesktopEntryBuilder {
                 .collect(Collectors.joining(";"))
                 + ";";
         entries.add(new Entry(Key.CATEGORIES, value));
+        return this;
+    }
+
+    /**
+     * A list of interfaces that this application implements. By default, a desktop file implements no interfaces.
+     * See
+     * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.5.html#interfaces">Interfaces</a>
+     * for more information on how this works.
+     *
+     * @param interfaces translates to 'implements' entry
+     * @return this
+     */
+    public DesktopEntryBuilder interfaces(List<String> interfaces) {
+        var value = String.join(";", interfaces) + ";";
+        entries.add(new Entry(Key.IMPLEMENTS, value));
         return this;
     }
 
@@ -342,6 +360,33 @@ public class DesktopEntryBuilder {
      */
     public DesktopEntryBuilder url(String url) {
         entries.add(new Entry(Key.URL, url));
+        return this;
+    }
+
+    /**
+     * If true, the application prefers to be run on a more powerful discrete GPU if available, which we describe as
+     * &quot;a GPU other than the default one&quot; in this spec to avoid the need to define what a discrete GPU is and
+     * in which cases it might be considered more powerful than the default GPU. This key is only a hint and support
+     * might not be present depending on the implementation.
+     *
+     * @param prefersNonDefaultGpu PrefersNonDefaultGPU value
+     * @return this
+     */
+    public DesktopEntryBuilder prefersNonDefaultGpu(boolean prefersNonDefaultGpu) {
+        entries.add(new Entry(Key.PREFERS_NON_DEFAULT_GPU, Boolean.toString(prefersNonDefaultGpu)));
+        return this;
+    }
+
+    /**
+     * If true, the application has a single main window, and does not support having an additional one opened. This
+     * key is used to signal to the implementation to avoid offering a UI to launch another window of the app. This
+     * key is only a hint and support might not be present depending on the implementation.
+     *
+     * @param singleMainWindow SingleMainWindow value
+     * @return this
+     */
+    public DesktopEntryBuilder singleMainWindow(boolean singleMainWindow) {
+        entries.add(new Entry(Key.SINGLE_MAIN_WINDOW, Boolean.toString(singleMainWindow)));
         return this;
     }
 

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -19,23 +19,67 @@ package org.panteleyev.freedesktop.menu;
  */
 public enum OnlyShowInEnvironment {
     /**
-     * GNOME Desktop
+     * GNOME Desktop.
      */
     GNOME("GNOME"),
     /**
-     * KDE Desktop
+     * GNOME Classic Desktop.
+     */
+    GNOME_CLASSIC("GNOME-Classic"),
+    /**
+     * GNOME Flashback Desktop.
+     */
+    GNOME_FLASHBACK("GNOME-Flashback"),
+    /**
+     * KDE Desktop.
      */
     KDE("KDE"),
     /**
-     * ROX Desktop
+     * LXDE Desktop.
+     */
+    LXDE("LXDE"),
+    /**
+     * LXQt Desktop.
+     */
+    LXQT("LXQt"),
+    /**
+     * MATÉ Desktop.
+     */
+    MATE("MATE"),
+    /**
+     * Razor-qt Desktop.
+     */
+    RAZOR("Razor"),
+    /**
+     * ROX Desktop.
      */
     ROX("ROX"),
     /**
-     * XFCE Desktop
+     * Trinity Desktop.
+     */
+    TDE("TDE"),
+    /**
+     * Unity Shell.
+     */
+    UNITY("Unity"),
+    /**
+     * XFCE Desktop.
      */
     XFCE("XFCE"),
     /**
-     * Legacy menu systems
+     * EDE Desktop.
+     */
+    EDE("EDE"),
+    /**
+     * Cinnamon Desktop.
+     */
+    CINNAMON("Cinnamon"),
+    /**
+     * Pantheon Desktop.
+     */
+    PANTHEON("Pantheon"),
+    /**
+     * Legacy menu systems.
      */
     OLD("Old");
 

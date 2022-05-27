@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -14,6 +14,6 @@
  */
 /**
  * Implements
- * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html">Desktop Entry Specification</a>.
+ * <a href="https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.5.html">Desktop Entry Specification</a>.
  */
 package org.panteleyev.freedesktop.entry;

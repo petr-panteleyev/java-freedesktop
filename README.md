@@ -7,11 +7,11 @@
 
 Java API to work with freedesktop.org menus, desktop entries, etc.
 
-|Specification| Version |
-|---|---------|
-|[XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-0.6.html)|0.6|
-|[Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.1.html)|1.1|
-|[Desktop Menu Specification](https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html)|1.0|
+| Specification                                                                                                        | Version |
+|----------------------------------------------------------------------------------------------------------------------|---------|
+| [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-0.8.html)        | 0.8     |
+| [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.5.html) | 1.5     |
+| [Desktop Menu Specification](https://specifications.freedesktop.org/menu-spec/menu-spec-1.1.html)                    | 1.1     |
 
 ## Build
 

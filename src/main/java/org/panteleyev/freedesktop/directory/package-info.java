@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -14,6 +14,6 @@
  */
 /**
  * Implements
- * <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-0.6.html/">XDG Base Directory Specification</a>.
+ * <a href="https://specifications.freedesktop.org/basedir-spec/basedir-spec-0.8.html/">XDG Base Directory Specification</a>.
  */
 package org.panteleyev.freedesktop.directory;

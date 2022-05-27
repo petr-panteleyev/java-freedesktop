@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -14,6 +14,6 @@
  */
 /**
  * Implements
- * <a href="https://specifications.freedesktop.org/menu-spec/menu-spec-1.0.html">Desktop Menu Specification</a>.
+ * <a href="https://specifications.freedesktop.org/menu-spec/menu-spec-1.1.html">Desktop Menu Specification</a>.
  */
 package org.panteleyev.freedesktop.menu;

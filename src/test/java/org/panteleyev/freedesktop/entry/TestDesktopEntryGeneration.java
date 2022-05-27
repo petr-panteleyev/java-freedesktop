@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2022, Petr Panteleyev
+ Copyright (C) 2022 Petr Panteleyev
 
  This program is free software: you can redistribute it and/or modify it under the
  terms of the GNU General Public License as published by the Free Software
@@ -14,15 +14,16 @@
  */
 package org.panteleyev.freedesktop.entry;
 
-import static org.panteleyev.freedesktop.entry.DesktopEntryBuilder.localeString;
 import org.panteleyev.freedesktop.menu.Category;
-import static org.testng.Assert.assertEquals;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static org.panteleyev.freedesktop.entry.DesktopEntryBuilder.localeString;
+import static org.testng.Assert.assertEquals;
 
 @Test
 public class TestDesktopEntryGeneration {
@@ -46,6 +47,7 @@ public class TestDesktopEntryGeneration {
                                 .name(localeString("Тестовое приложение", "ru_RU"))
                                 .comment("Super test application")
                                 .noDisplay(false)
+                                .singleMainWindow(true)
                                 .categories(List.of(Category.DEVELOPMENT, Category.IDE)),
                         """
                         [Desktop Entry]
@@ -55,12 +57,13 @@ public class TestDesktopEntryGeneration {
                         NoDisplay=false
                         Comment=Super test application
                         Categories=Development;IDE;
+                        SingleMainWindow=true
                         """
                 },
                 {
                         // Example from spec
                         new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
-                                .version(DesktopEntryBuilder.VERSION_1_0)
+                                .version(DesktopEntryBuilder.VERSION_1_5)
                                 .name("Foo Viewer")
                                 .comment("The best viewer for Foo objects available!")
                                 .customEntry("X-KDE-StartupNotify", "true")
@@ -84,7 +87,7 @@ public class TestDesktopEntryGeneration {
                         """
                         [Desktop Entry]
                         Type=Application
-                        Version=1.0
+                        Version=1.5
                         Name=Foo Viewer
                         Comment=The best viewer for Foo objects available!
                         Icon=fooview
