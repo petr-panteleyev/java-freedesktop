@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (C) 2022 Petr Panteleyev
-
-  This program is free software: you can redistribute it and/or modify it under the
-  terms of the GNU General Public License as published by the Free Software
-  Foundation, either version 3 of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful, but WITHOUT ANY
-  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License along with this
-  program. If not, see <https://www.gnu.org/licenses/>.
+  Copyright © 2022 Petr Panteleyev <petr@panteleyev.org>
+  SPDX-License-Identifier: BSD-2-Clause
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -19,7 +9,7 @@
 
     <groupId>org.panteleyev</groupId>
     <artifactId>freedesktop</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <packaging>jar</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -27,14 +17,14 @@
     <url>https://github.com/petr-panteleyev/java-freedesktop</url>
     <licenses>
         <license>
-            <name>GNU General Public License version 3</name>
-            <url>https://opensource.org/licenses/GPL-3.0</url>
+            <name>The 2-Clause BSD License</name>
+            <url>https://opensource.org/licenses/BSD-2-Clause</url>
         </license>
     </licenses>
     <developers>
         <developer>
             <name>Petr Panteleyev</name>
-            <email>petr-panteleyev@yandex.ru</email>
+            <email>petr@panteleyev.org</email>
             <organization>panteleyev.org</organization>
             <organizationUrl>https://github.com/petr-panteleyev</organizationUrl>
         </developer>

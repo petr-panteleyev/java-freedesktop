@@ -15,7 +15,7 @@ Java API to work with freedesktop.org menus, desktop entries, etc.
 
 ## Build
 
-Make sure ```JAVA_HOME``` is set to JDK 18.
+Make sure ```JAVA_HOME``` points to JDK 18.
 
 ```shell script
 mvn clean install
