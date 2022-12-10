@@ -4,13 +4,14 @@
  */
 package org.panteleyev.freedesktop.entry;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
-@Test
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestApplicationAction {
 
-    @Test(expectedExceptions = ValidationException.class)
+    @Test
     public void testDesktopActionBuilderValidation() {
-        new ApplicationActionBuilder("Name").build();
+        assertThrows(ValidationException.class, () -> new ApplicationActionBuilder("Name").build());
     }
 }

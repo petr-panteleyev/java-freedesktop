@@ -4,37 +4,38 @@
  */
 package org.panteleyev.freedesktop.entry;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.panteleyev.freedesktop.menu.Category;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 
 import java.util.List;
 
-@Test
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestDesktopEntryValidation {
 
-    @DataProvider
-    public Object[][] dataProvider() {
-        return new Object[][]{
-                {
+    public static List<Arguments> dataProvider() {
+        return List.of(
+                Arguments.of(
                         new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
                                 .categories(List.of(Category.IDE))
-                },
-                {
+                ),
+                Arguments.of(
                         new DesktopEntryBuilder(DesktopEntryType.APPLICATION)
                                 .name("Name")
                                 .url("url")
-                },
-                {
+                ),
+                Arguments.of(
                         new DesktopEntryBuilder(DesktopEntryType.LINK)
                                 .name("Name")
-                },
-        };
+                )
+        );
     }
 
-
-    @Test(dataProvider = "dataProvider", expectedExceptions = ValidationException.class)
+    @ParameterizedTest
+    @MethodSource("dataProvider")
     public void testNegativeValidation(DesktopEntryBuilder builder) {
-        builder.build();
+        assertThrows(ValidationException.class, builder::build);
     }
 }
