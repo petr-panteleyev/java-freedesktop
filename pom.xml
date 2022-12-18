@@ -37,12 +37,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>18</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <!-- Plugins -->
-        <mavenCompilerPluginVersion>3.8.1</mavenCompilerPluginVersion>
-        <mavenJarPluginVersion>3.2.0</mavenJarPluginVersion>
-        <mavenSurefirePluginVersion>3.0.0-M6</mavenSurefirePluginVersion>
+        <mavenCompilerPluginVersion>3.10.1</mavenCompilerPluginVersion>
+        <mavenJarPluginVersion>3.3.0</mavenJarPluginVersion>
+        <mavenSurefirePluginVersion>3.0.0-M7</mavenSurefirePluginVersion>
         <mavenJavadocPluginVersion>3.2.0</mavenJavadocPluginVersion>
         <mavenSourcePluginVersion>3.2.0</mavenSourcePluginVersion>
         <mavenGpgPluginVersion>1.6</mavenGpgPluginVersion>
